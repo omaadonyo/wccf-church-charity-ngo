@@ -11,11 +11,25 @@
             </a>
         </div>
 
-        @if(session('success'))
-            <div class="rounded-lg bg-green-50 dark:bg-green-900/20 p-4 text-sm text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">{{ session('success') }}</div>
-        @endif
+@if(session('success'))
+    <div class="rounded-lg bg-green-50 dark:bg-green-900/20 p-4 text-sm text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">{{ session('success') }}</div>
+@endif
 
-        <div class="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+<flux:modal name="preview-modal" class="max-w-6xl w-full" x-on:modal-close.document="document.getElementById('preview-iframe').src = ''">
+    <div class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
+        <h3 class="text-lg font-semibold text-zinc-900 dark:text-white" id="preview-title">Preview</h3>
+        <flux:modal.close>
+            <button class="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-700 hover:bg-zinc-100 dark:hover:text-zinc-300 dark:hover:bg-zinc-800">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </flux:modal.close>
+    </div>
+    <div class="h-[80vh]">
+        <iframe id="preview-iframe" src="" class="w-full h-full border-0 rounded-b-xl" title="Page preview"></iframe>
+    </div>
+</flux:modal>
+
+<div class="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
             <table class="w-full text-sm">
                 <thead class="bg-zinc-50 dark:bg-zinc-800 border-b border-neutral-200 dark:border-neutral-700">
                     <tr>
@@ -41,6 +55,12 @@
                             </td>
                             <td class="px-4 py-3 text-end">
                                 <div class="flex items-center justify-end gap-2">
+                                    <flux:modal.trigger name="preview-modal">
+                                        <button onclick="setPreview('{{ $page->title }}', '{{ route('admin.pages.preview', $page) }}')" class="px-3 py-1.5 rounded-md text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+                                            <svg class="w-3.5 h-3.5 inline-block -mt-0.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                            Preview
+                                        </button>
+                                    </flux:modal.trigger>
                                     <a href="{{ route('admin.pages.builder', $page) }}" class="px-3 py-1.5 rounded-md text-xs font-medium bg-red-600 text-white hover:bg-red-700 transition-colors">Builder</a>
                                     <a href="{{ route('admin.pages.edit', $page) }}" class="px-3 py-1.5 rounded-md text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">Settings</a>
                                     <form method="POST" action="{{ route('admin.pages.destroy', $page) }}" onsubmit="return confirm('Delete this page?')">
@@ -61,3 +81,9 @@
         <div>{{ $pages->links() }}</div>
     </div>
 </x-layouts::app>
+<script>
+function setPreview(title, url) {
+    document.getElementById('preview-title').textContent = 'Preview: ' + title;
+    document.getElementById('preview-iframe').src = url;
+}
+</script>

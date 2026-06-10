@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
         ActivityLogger::log('page_created', 'Page "' . $page->title . '" created');
         return redirect()->route('admin.pages.index')->with('success', 'Page created.');
     })->name('pages.store');
+    Route::get('/pages/{page}/preview', fn (Page $page) => view('public.page', ['page' => $page]))->name('pages.preview');
     Route::get('/pages/{page}/builder', fn (Page $page) => view('admin.pages.builder', ['page' => $page, 'mediaItems' => \App\Models\Media::latest()->get()]))->name('pages.builder');
     Route::get('/pages/{page}/edit', fn (Page $page) => view('admin.pages.form', ['page' => $page, 'pageRoutes' => collect(\Illuminate\Support\Facades\Route::getRoutes()->getRoutesByName())->keys()->filter(fn ($n) => str_starts_with($n, 'admin.') === false)->values()]))->name('pages.edit');
     Route::put('/pages/{page}', function (Request $request, Page $page) {
