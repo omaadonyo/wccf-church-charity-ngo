@@ -330,6 +330,21 @@ class PageContentSeeder extends Seeder
                     'background' => 'white',
                 ],
             ],
+            [
+                'id' => 'sec_gi_form',
+                'type' => 'volunteer_form',
+                'data' => [
+                    'label' => 'SERVE WITH US',
+                    'heading' => 'Volunteer &amp; <span class="text-red">Membership</span>',
+                    'subtitle' => 'Whether you want to volunteer your time and talents or become an official member of WCCF, we would love to hear from you. Fill out the form below and our team will reach out.',
+                    'button_text' => 'Submit Application',
+                    'form_type' => 'volunteer',
+                    'show_church_field' => true,
+                    'message_label' => 'Your Message / Why you want to get involved',
+                    'message_placeholder' => 'Tell us about your skills, availability, and why you want to serve...',
+                    'background' => 'light',
+                ],
+            ],
         ]]);
     }
 

@@ -52,6 +52,7 @@
                             ['type' => 'vision_mission', 'label' => 'Vision & Mission', 'icon' => 'M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'],
                             ['type' => 'recent_posts', 'label' => 'Recent Posts', 'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z'],
                             ['type' => 'team', 'label' => 'Team Members', 'icon' => 'M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z'],
+                            ['type' => 'volunteer_form', 'label' => 'Volunteer / Membership Form', 'icon' => 'M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z'],
                         ];
                     @endphp
                     @foreach($sectionTypes as $st)
@@ -633,6 +634,50 @@
                 <div class="border-t border-zinc-200 dark:border-zinc-700 pt-4"><label class="block text-xs font-medium text-zinc-500 mb-1">Background</label>
                     <select onchange="updateSectionData('${id}','background',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">
                         <option value="wwhite" ${d.background === 'dark' ? '' : 'selected'}>White</option>
+                        <option value="dark" ${d.background === 'dark' ? 'selected' : ''}>Dark (Navy)</option>
+                    </select>
+                </div>
+            </div>`
+        },
+        volunteer_form: {
+            label: 'Volunteer / Membership Form',
+            defaultData: {
+                heading: 'Volunteer &amp; <span class=&quot;text-primary&quot;>Membership</span>',
+                subtitle: 'Fill out the form below to express your interest in volunteering or becoming a member of WCCF.',
+                label: 'JOIN US',
+                button_text: 'Submit Application',
+                form_type: 'volunteer',
+                show_church_field: true,
+                message_label: 'Your Message / Why you want to get involved',
+                message_placeholder: 'Tell us about your skills, availability, and why you want to serve...',
+                background: 'light',
+            },
+            render: (d) => `<div class="bg-${d.background === 'dark' ? 'navy text-white' : 'surface'} py-16 px-6 text-center rounded-xl">
+                <div class="max-w-md mx-auto">
+                    ${d.label ? `<span class="text-xs font-semibold tracking-widest uppercase text-red">${esc(d.label)}</span>` : ''}
+                    <h3 class="text-2xl font-bold mt-2 mb-3 ${d.background === 'dark' ? 'text-white' : 'text-navy'}">${esc(d.heading)}</h3>
+                    <p class="text-sm ${d.background === 'dark' ? 'text-gray-300' : 'text-gray-600'}">${esc(d.subtitle)}</p>
+                    <div class="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold shadow-lg">${esc(d.button_text)}</div>
+                </div>
+            </div>`,
+            editor: (d, id) => `<div class="space-y-4">
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Label (badge)</label><input type="text" value="${esc(d.label || '')}" onchange="updateSectionData('${id}','label',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"></div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Heading</label>${headingEditor(id, 'heading', d.heading)}</div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Subtitle</label><textarea rows="2" onchange="updateSectionData('${id}','subtitle',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">${esc(d.subtitle)}</textarea></div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Button Text</label><input type="text" value="${esc(d.button_text || 'Submit Application')}" onchange="updateSectionData('${id}','button_text',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"></div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Form Type</label>
+                    <select onchange="updateSectionData('${id}','form_type',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">
+                        <option value="volunteer" ${d.form_type === 'volunteer' ? 'selected' : ''}>Volunteer</option>
+                        <option value="membership" ${d.form_type === 'membership' ? 'selected' : ''}>Membership</option>
+                        <option value="general" ${d.form_type === 'general' ? 'selected' : ''}>General Inquiry</option>
+                    </select>
+                </div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Message Label</label><input type="text" value="${esc(d.message_label || '')}" onchange="updateSectionData('${id}','message_label',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"></div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Message Placeholder</label><input type="text" value="${esc(d.message_placeholder || '')}" onchange="updateSectionData('${id}','message_placeholder',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"></div>
+                <div><label class="flex items-center gap-2 text-sm font-medium text-zinc-500"><input type="checkbox" ${d.show_church_field !== false ? 'checked' : ''} onchange="updateSectionData('${id}','show_church_field',this.checked)" class="rounded border-zinc-300 dark:border-zinc-600"> Show Church field</label></div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Background</label>
+                    <select onchange="updateSectionData('${id}','background',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">
+                        <option value="light" ${d.background !== 'dark' ? 'selected' : ''}>Light</option>
                         <option value="dark" ${d.background === 'dark' ? 'selected' : ''}>Dark (Navy)</option>
                     </select>
                 </div>

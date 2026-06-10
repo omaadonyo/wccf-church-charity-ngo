@@ -36,6 +36,9 @@
                     <flux:sidebar.item icon="window" :href="route('admin.footer.index')" :current="request()->routeIs('admin.footer.*')" wire:navigate>
                         {{ __('Footer') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="clipboard-document-list" :href="route('admin.submissions.index')" :current="request()->routeIs('admin.submissions.*')" wire:navigate>
+                        {{ __('Submissions') }}
+                    </flux:sidebar.item>
                     <flux:sidebar.item icon="archive-box" :href="route('admin.backup.index')" :current="request()->routeIs('admin.backup.*')" wire:navigate>
                         {{ __('Backup') }}
                     </flux:sidebar.item>

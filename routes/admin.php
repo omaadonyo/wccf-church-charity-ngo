@@ -161,6 +161,16 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::get('/backup/export', [\App\Http\Controllers\Admin\BackupController::class, 'export'])->name('backup.export');
     Route::post('/backup/import', [\App\Http\Controllers\Admin\BackupController::class, 'import'])->name('backup.import');
 
+    // Form Submissions
+    Route::get('/submissions', function () {
+        $submissions = \App\Models\FormSubmission::latest()->paginate(20);
+        return view('admin.submissions.index', compact('submissions'));
+    })->name('submissions.index');
+    Route::delete('/submissions/{submission}', function (\App\Models\FormSubmission $submission) {
+        $submission->delete();
+        return back()->with('success', 'Submission deleted.');
+    })->name('submissions.destroy');
+
     // Blog categories
     Route::get('/blog/categories', fn () => view('admin.blog.categories', ['categories' => BlogCategory::withCount('posts')->latest()->get()]))->name('blog.categories');
     Route::post('/blog/categories', function (Request $request) {
