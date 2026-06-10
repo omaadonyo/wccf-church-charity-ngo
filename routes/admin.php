@@ -85,7 +85,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     })->name('menu-items.destroy');
 
     // Theme
-    Route::get('/theme', fn () => view('admin.theme.index', ['settings' => ThemeSetting::all()->keyBy('key')]))->name('theme.index');
+    Route::get('/theme', fn () => view('admin.theme.index', ['settings' => ThemeSetting::all()->keyBy('key'), 'mediaItems' => \App\Models\Media::latest()->get()]))->name('theme.index');
     Route::post('/theme', function (Request $request) {
         foreach ($request->except('_token') as $key => $value) {
             if (str_starts_with($key, 'theme_')) {
