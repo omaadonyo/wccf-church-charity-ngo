@@ -15,8 +15,8 @@
     <div class="rounded-lg bg-green-50 dark:bg-green-900/20 p-4 text-sm text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">{{ session('success') }}</div>
 @endif
 
-<flux:modal name="preview-modal" class="max-w-6xl w-full" x-on:modal-close.document="document.getElementById('preview-iframe').src = ''">
-    <div class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
+<flux:modal name="preview-modal" class="!p-0 max-w-6xl w-full overflow-hidden" x-on:modal-close.document="document.getElementById('preview-iframe').src = ''">
+    <div class="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-700">
         <h3 class="text-lg font-semibold text-zinc-900 dark:text-white" id="preview-title">Preview</h3>
         <flux:modal.close>
             <button class="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-700 hover:bg-zinc-100 dark:hover:text-zinc-300 dark:hover:bg-zinc-800">
@@ -25,7 +25,7 @@
         </flux:modal.close>
     </div>
     <div class="h-[80vh]">
-        <iframe id="preview-iframe" src="" class="w-full h-full border-0 rounded-b-xl" title="Page preview"></iframe>
+        <iframe id="preview-iframe" src="" class="w-full h-full border-0" title="Page preview"></iframe>
     </div>
 </flux:modal>
 
