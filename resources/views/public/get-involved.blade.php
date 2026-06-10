@@ -6,7 +6,7 @@
     {{-- Hero --}}
     <section class="relative min-h-[50vh] flex items-center overflow-hidden bg-navy">
         <div class="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy"></div>
-        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 50% 50%, rgba(192, 57, 43, 0.07) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(192, 57, 43, 0.05) 0%, transparent 50%);"></div>
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-primary) 7%, transparent) 0%, transparent 50%), radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--color-primary) 5%, transparent) 0%, transparent 50%);"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 w-full">
             <div class="animate-on-scroll fade-in-up text-center">
                 <span class="text-red font-semibold text-sm tracking-widest uppercase">Join Us</span>

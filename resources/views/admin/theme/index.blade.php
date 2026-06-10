@@ -1,8 +1,8 @@
 <x-layouts::app :title="__('Theme Settings')">
     <style>
         .media-item { cursor: pointer; transition: all 0.15s; }
-        .media-item:hover { border-color: #560534; box-shadow: 0 0 0 2px rgba(86,5,52,0.2); }
-        .media-item.selected { border-color: #560534; box-shadow: 0 0 0 2px rgba(86,5,52,0.4); }
+        .media-item:hover { border-color: var(--color-primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent); }
+        .media-item.selected { border-color: var(--color-primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 40%, transparent); }
         .media-item img { pointer-events: none; }
     </style>
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl p-6">
@@ -21,19 +21,61 @@
             {{-- Colors --}}
             <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-zinc-800">
                 <h2 class="text-lg font-semibold text-zinc-900 dark:text-white mb-4">Colors</h2>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Primary Color</label>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Primary</label>
                         <div class="flex items-center gap-2">
                             <input type="color" name="theme_primary_color" value="{{ $settings->get('theme_primary_color')->value ?? '#560534' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
                             <input type="text" name="theme_primary_color_hex" value="{{ $settings->get('theme_primary_color')->value ?? '#560534' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Secondary Color (Navy)</label>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Primary Light</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" name="theme_primary_light" value="{{ $settings->get('theme_primary_light')->value ?? '#8c2355' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
+                            <input type="text" name="theme_primary_light_hex" value="{{ $settings->get('theme_primary_light')->value ?? '#8c2355' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Primary Dark</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" name="theme_primary_dark" value="{{ $settings->get('theme_primary_dark')->value ?? '#3c0324' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
+                            <input type="text" name="theme_primary_dark_hex" value="{{ $settings->get('theme_primary_dark')->value ?? '#3c0324' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Secondary (Navy)</label>
                         <div class="flex items-center gap-2">
                             <input type="color" name="theme_secondary_color" value="{{ $settings->get('theme_secondary_color')->value ?? '#0f1b2d' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
                             <input type="text" name="theme_secondary_color_hex" value="{{ $settings->get('theme_secondary_color')->value ?? '#0f1b2d' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Secondary Light</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" name="theme_secondary_light" value="{{ $settings->get('theme_secondary_light')->value ?? '#1a2d4a' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
+                            <input type="text" name="theme_secondary_light_hex" value="{{ $settings->get('theme_secondary_light')->value ?? '#1a2d4a' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Surface (Background)</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" name="theme_surface_color" value="{{ $settings->get('theme_surface_color')->value ?? '#fbf9f6' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
+                            <input type="text" name="theme_surface_color_hex" value="{{ $settings->get('theme_surface_color')->value ?? '#fbf9f6' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Surface Dark</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" name="theme_surface_dark" value="{{ $settings->get('theme_surface_dark')->value ?? '#f5f0ea' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
+                            <input type="text" name="theme_surface_dark_hex" value="{{ $settings->get('theme_surface_dark')->value ?? '#f5f0ea' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Text Color</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" name="theme_text_color" value="{{ $settings->get('theme_text_color')->value ?? '#2d2d2d' }}" class="w-10 h-10 rounded border border-zinc-300 dark:border-zinc-600 cursor-pointer">
+                            <input type="text" name="theme_text_color_hex" value="{{ $settings->get('theme_text_color')->value ?? '#2d2d2d' }}" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm font-mono">
                         </div>
                     </div>
                 </div>

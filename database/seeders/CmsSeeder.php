@@ -20,8 +20,14 @@ class CmsSeeder extends Seeder
 
         // Theme defaults
         $defaults = [
-            ['key' => 'theme_primary_color', 'value' => '#c0392b'],
+            ['key' => 'theme_primary_color', 'value' => '#560534'],
+            ['key' => 'theme_primary_light', 'value' => '#8c2355'],
+            ['key' => 'theme_primary_dark', 'value' => '#3c0324'],
             ['key' => 'theme_secondary_color', 'value' => '#0f1b2d'],
+            ['key' => 'theme_secondary_light', 'value' => '#1a2d4a'],
+            ['key' => 'theme_surface_color', 'value' => '#fbf9f6'],
+            ['key' => 'theme_surface_dark', 'value' => '#f5f0ea'],
+            ['key' => 'theme_text_color', 'value' => '#2d2d2d'],
             ['key' => 'theme_heading_font', 'value' => 'Rubik'],
             ['key' => 'theme_body_font', 'value' => 'Lato'],
             ['key' => 'theme_logo_url', 'value' => ''],

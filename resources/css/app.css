@@ -33,19 +33,19 @@
     --color-accent-content: var(--color-primary);
     --color-accent-foreground: var(--color-white);
 
-    --color-primary: #560534;
-    --color-primary-light: #8c2355;
-    --color-primary-dark: #3c0324;
+    --color-primary: var(--tp-primary, #560534);
+    --color-primary-light: var(--tp-primary-light, #8c2355);
+    --color-primary-dark: var(--tp-primary-dark, #3c0324);
 
-    --color-red: #560534;
-    --color-red-light: #8c2355;
-    --color-red-dark: #3c0324;
+    --color-red: var(--tp-primary, #560534);
+    --color-red-light: var(--tp-primary-light, #8c2355);
+    --color-red-dark: var(--tp-primary-dark, #3c0324);
 
-    --color-wwhite: #fbf9f6;
-    --color-wwhite-dark: #f5f0ea;
-    --color-navy: #0f1b2d;
-    --color-navy-light: #1a2d4a;
-    --color-charcoal: #2d2d2d;
+    --color-wwhite: var(--tp-surface, #fbf9f6);
+    --color-wwhite-dark: var(--tp-surface-dark, #f5f0ea);
+    --color-navy: var(--tp-secondary, #0f1b2d);
+    --color-navy-light: var(--tp-secondary-light, #1a2d4a);
+    --color-charcoal: var(--tp-text, #2d2d2d);
     --color-cream: #fdf8f0;
 
     --animate-pulse-soft: pulse-soft 2s ease-in-out infinite;
@@ -224,7 +224,7 @@
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(15, 27, 45, 0.85) 0%, rgba(15, 27, 45, 0.65) 50%, rgba(15, 27, 45, 0.4) 100%);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-navy) 85%, transparent) 0%, color-mix(in srgb, var(--color-navy) 65%, transparent) 50%, color-mix(in srgb, var(--color-navy) 40%, transparent) 100%);
 }
 
 .hero-content {
@@ -296,7 +296,7 @@
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px -10px rgba(86, 5, 52, 0.4);
+    box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--color-primary) 40%, transparent);
 }
 
 .btn-outline {
@@ -317,7 +317,7 @@
     background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px -10px rgba(86, 5, 52, 0.4);
+    box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--color-primary) 40%, transparent);
 }
 
 .navbar-transparent {

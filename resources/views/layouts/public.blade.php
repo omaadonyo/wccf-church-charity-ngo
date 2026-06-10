@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth"
+    @php
+        $tpPrimary = \App\Models\ThemeSetting::getValue('theme_primary_color', '#560534');
+        $tpPrimaryLight = \App\Models\ThemeSetting::getValue('theme_primary_light', '#8c2355');
+        $tpPrimaryDark = \App\Models\ThemeSetting::getValue('theme_primary_dark', '#3c0324');
+        $tpSecondary = \App\Models\ThemeSetting::getValue('theme_secondary_color', '#0f1b2d');
+        $tpSecondaryLight = \App\Models\ThemeSetting::getValue('theme_secondary_light', '#1a2d4a');
+        $tpSurface = \App\Models\ThemeSetting::getValue('theme_surface_color', '#fbf9f6');
+        $tpSurfaceDark = \App\Models\ThemeSetting::getValue('theme_surface_dark', '#f5f0ea');
+        $tpText = \App\Models\ThemeSetting::getValue('theme_text_color', '#2d2d2d');
+    @endphp
+    style="--tp-primary:{{ $tpPrimary }};--tp-primary-light:{{ $tpPrimaryLight }};--tp-primary-dark:{{ $tpPrimaryDark }};--tp-secondary:{{ $tpSecondary }};--tp-secondary-light:{{ $tpSecondaryLight }};--tp-surface:{{ $tpSurface }};--tp-surface-dark:{{ $tpSurfaceDark }};--tp-text:{{ $tpText }}"
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="West Nile Christian Community Fellowship - A Christian Community Promoting Renewed, Healed and Prayerful Christians">
-    <meta name="theme-color" content="#0f1b2d">
+    <meta name="theme-color" content="{{ \App\Models\ThemeSetting::getValue('theme_secondary_color', '#0f1b2d') }}">
     <title>@yield('title', 'WCCF') | West Nile Christian Community Fellowship</title>
 
     @php
