@@ -88,7 +88,7 @@ function viewSubmission(name, data) {
         }
     }
     body.innerHTML = html || '<p class="text-zinc-500">No details available.</p>';
-    Livewire.dispatch('flux-open-modal', { name: 'submission-detail-modal' });
+    document.dispatchEvent(new CustomEvent('modal-show', { detail: { name: 'submission-detail-modal' } }));
 }
 function esc(str) { if (!str) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 </script>
