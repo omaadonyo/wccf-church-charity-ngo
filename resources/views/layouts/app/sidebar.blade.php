@@ -30,8 +30,11 @@
                     <flux:sidebar.item icon="pencil-square" :href="route('admin.blog.index')" :current="request()->routeIs('admin.blog.*')" wire:navigate>
                         {{ __('Blog') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="paint-brush" :href="route('admin.theme.index')" :current="request()->routeIs('admin.theme.*')" wire:navigate>
-                        {{ __('Theme') }}
+                    <flux:sidebar.item icon="paint-brush" :href="route('admin.theme.index')" :current="request()->routeIs('admin.theme.*') && !request()->routeIs('admin.themes.*')" wire:navigate>
+                        {{ __('Theme Colors') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="swatch" :href="route('admin.themes.index')" :current="request()->routeIs('admin.themes.*')" wire:navigate>
+                        {{ __('Theme Manager') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="window" :href="route('admin.footer.index')" :current="request()->routeIs('admin.footer.*')" wire:navigate>
                         {{ __('Footer') }}

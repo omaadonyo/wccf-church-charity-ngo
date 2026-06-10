@@ -32,6 +32,7 @@ class CmsSeeder extends Seeder
             ['key' => 'theme_body_font', 'value' => 'Lato'],
             ['key' => 'theme_logo_url', 'value' => ''],
             ['key' => 'theme_favicon_url', 'value' => ''],
+            ['key' => 'active_theme', 'value' => 'default'],
         ];
         foreach ($defaults as $setting) {
             ThemeSetting::firstOrCreate(['key' => $setting['key']], ['value' => $setting['value']]);

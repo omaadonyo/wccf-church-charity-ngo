@@ -171,6 +171,38 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
         return back()->with('success', 'Submission deleted.');
     })->name('submissions.destroy');
 
+    // Theme Manager
+    Route::get('/themes', function () {
+        $themes = app(\App\Services\ThemeService::class)->getAll();
+        return view('admin.themes.index', compact('themes'));
+    })->name('themes.index');
+    Route::post('/themes/activate', function (\Illuminate\Http\Request $request) {
+        $slug = $request->input('slug');
+        if (app(\App\Services\ThemeService::class)->activate($slug)) {
+            ActivityLogger::log('theme_activated', 'Theme "' . $slug . '" activated');
+            return back()->with('success', 'Theme "' . $slug . '" activated.');
+        }
+        return back()->with('error', 'Could not activate theme.');
+    })->name('themes.activate');
+    Route::delete('/themes/uninstall', function (\Illuminate\Http\Request $request) {
+        $slug = $request->input('slug');
+        if (app(\App\Services\ThemeService::class)->uninstall($slug)) {
+            ActivityLogger::log('theme_uninstalled', 'Theme "' . $slug . '" uninstalled');
+            return back()->with('success', 'Theme "' . $slug . '" uninstalled.');
+        }
+        return back()->with('error', 'Could not uninstall theme.');
+    })->name('themes.uninstall');
+    Route::post('/themes/upload', function (\Illuminate\Http\Request $request) {
+        $request->validate(['theme_zip' => 'required|file|mimes:zip|max:51200']);
+        $result = app(\App\Services\ThemeService::class)->installFromZip($request->file('theme_zip'));
+        if ($result['success']) {
+            $name = $result['theme']['name'] ?? $result['theme']['slug'];
+            ActivityLogger::log('theme_installed', 'Theme "' . $name . '" installed');
+            return back()->with('success', 'Theme "' . $name . '" installed successfully.');
+        }
+        return back()->with('error', $result['error'] ?? 'Installation failed.');
+    })->name('themes.upload');
+
     // Blog categories
     Route::get('/blog/categories', fn () => view('admin.blog.categories', ['categories' => BlogCategory::withCount('posts')->latest()->get()]))->name('blog.categories');
     Route::post('/blog/categories', function (Request $request) {

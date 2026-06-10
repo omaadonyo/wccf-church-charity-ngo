@@ -33,6 +33,11 @@
     @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @php $themeCss = app('theme')->assetUrl('css/theme.css'); @endphp
+    @if($themeCss)
+        <link rel="stylesheet" href="{{ $themeCss }}">
+    @endif
+    @stack('styles')
 </head>
 <body class="antialiased">
     <nav class="navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300 @yield('navbarExtra', 'navbar-solid')" data-transparent="@yield('navbarTransparent', 'false')">
