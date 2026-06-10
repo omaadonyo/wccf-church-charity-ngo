@@ -56,6 +56,8 @@ class PageContentSeeder extends Seeder
                     'right_label' => 'Our Story',
                     'right_heading' => 'Why <span class="text-red">WCCF?</span>',
                     'right_content' => "For over three decades, WCCF has been a beacon of hope and fellowship for the West Nile community in Uganda. Born from a vision to unite our people in worship and mutual support, we've grown from a small gathering into a fellowship spanning 70+ churches across three regions.\n\nOur strength lies in our commitment to Scripture, our love for families, and our dedication to serving the vulnerable. Every fellowship, every outreach, every prayer meeting is a step toward building a renewed, healed, and prayerful Christian community.",
+                    'right_button_text' => 'Learn Our Story',
+                    'right_button_url' => '/who-we-are',
                 ],
             ],
             [

@@ -16,6 +16,9 @@
                         <img src="{{ $data['left_image'] }}" alt="" class="w-full aspect-[4/3] object-cover">
                     </div>
                 @endif
+                @if(!empty($data['left_button_text']) && !empty($data['left_button_url']))
+                    <a href="{{ $data['left_button_url'] }}" class="btn-primary mt-6 inline-flex">{{ $data['left_button_text'] }}</a>
+                @endif
             </div>
             <div class="animate-on-scroll fade-in-right">
                 @if(!empty($data['right_label']))
@@ -31,6 +34,9 @@
                     <div class="mt-6 rounded-2xl overflow-hidden shadow-xl">
                         <img src="{{ $data['right_image'] }}" alt="" class="w-full aspect-[4/3] object-cover">
                     </div>
+                @endif
+                @if(!empty($data['right_button_text']) && !empty($data['right_button_url']))
+                    <a href="{{ $data['right_button_url'] }}" class="btn-primary mt-6 inline-flex">{{ $data['right_button_text'] }}</a>
                 @endif
             </div>
         </div>

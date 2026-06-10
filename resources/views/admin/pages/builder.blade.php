@@ -486,6 +486,14 @@
                 </div>
                 <div><label class="block text-xs font-medium text-zinc-500 mb-1">Right Heading</label>${headingEditor(id, 'right_heading', d.right_heading)}</div>
                 <div><label class="block text-xs font-medium text-zinc-500 mb-1">Right Content</label><textarea rows="3" onchange="updateSectionData('${id}','right_content',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">${esc(d.right_content)}</textarea></div>
+                <div class="border-t border-zinc-200 dark:border-zinc-700 pt-4">
+                    <label class="block text-xs font-medium text-zinc-500 mb-2">Left Button</label>
+                    <div class="grid grid-cols-2 gap-2"><input type="text" value="${esc(d.left_button_text || '')}" placeholder="Button text" onchange="updateSectionData('${id}','left_button_text',this.value)" class="px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"><input type="text" value="${esc(d.left_button_url || '')}" placeholder="URL" onchange="updateSectionData('${id}','left_button_url',this.value)" class="px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"></div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-zinc-500 mb-2">Right Button</label>
+                    <div class="grid grid-cols-2 gap-2"><input type="text" value="${esc(d.right_button_text || '')}" placeholder="Button text" onchange="updateSectionData('${id}','right_button_text',this.value)" class="px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"><input type="text" value="${esc(d.right_button_url || '')}" placeholder="URL" onchange="updateSectionData('${id}','right_button_url',this.value)" class="px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"></div>
+                </div>
             </div>`
         },
         hero_slider: {
