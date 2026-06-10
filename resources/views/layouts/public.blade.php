@@ -33,7 +33,7 @@
     @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @php $themeCss = app('theme')->assetUrl('css/theme.css'); @endphp
+    @php $themeCss = theme()->assetUrl('css/theme.css'); @endphp
     @if($themeCss)
         <link rel="stylesheet" href="{{ $themeCss }}">
     @endif

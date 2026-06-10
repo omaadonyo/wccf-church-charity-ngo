@@ -27,10 +27,5 @@ class ThemeServiceProvider extends ServiceProvider
                 $finder->prependLocation($themeViewsPath);
             }
         }
-
-        // Register theme() helper for Blade/views
-        $this->app->make('view')->getEngineResolver()->resolve('blade')->getCompiler()->directive('themeAsset', function ($path) {
-            return "<?php echo app('theme')->assetUrl($path); ?>";
-        });
     }
 }
