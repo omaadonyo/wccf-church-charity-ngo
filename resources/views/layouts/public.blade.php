@@ -35,8 +35,8 @@
                             W
                         </div>
                         <div class="hidden sm:block">
-                            <span class="font-heading text-xl font-bold @if(Route::currentRouteName() === 'home') text-white @else text-navy @endif">WCCF</span>
-                            <span class="block text-xs @if(Route::currentRouteName() === 'home') text-white/60 @else text-gray-500 @endif -mt-1">West Nile Christian Fellowship</span>
+                            <span class="font-heading text-xl font-bold text-white">WCCF</span>
+                            <span class="block text-xs text-white/60 -mt-1">West Nile Christian Fellowship</span>
                         </div>
                     @endif
                 </a>
@@ -51,21 +51,20 @@
                             ['route' => 'get-involved', 'label' => 'Get Involved'],
                             ['route' => 'donate', 'label' => 'Donate'],
                         ];
-                        $isHome = Route::currentRouteName() === 'home';
                     @endphp
                     @foreach($links as $link)
                         <a href="{{ route($link['route']) }}"
-                           class="nav-link text-sm tracking-wide @if(Route::currentRouteName() === $link['route']) active @endif @if($isHome) text-white/80 hover:text-white @else text-gray-600 hover:text-navy @endif">
+                           class="nav-link text-sm tracking-wide @if(Route::currentRouteName() === $link['route']) active @endif text-white/80 hover:text-white">
                             {{ $link['label'] }}
                         </a>
                     @endforeach
-                    <a href="{{ route('donate') }}" @if($isHome) class="btn-primary text-sm px-5 py-2.5 bg-white text-navy hover:bg-white/90 shadow-lg" style="background: white; color: #0f1b2d;" @else class="btn-primary text-sm px-5 py-2.5" @endif>
+                    <a href="{{ route('donate') }}" class="btn-primary text-sm px-5 py-2.5 bg-white text-navy hover:bg-white/90 shadow-lg" style="background: white; color: #0f1b2d;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                         Give Now
                     </a>
                 </div>
 
-                <button class="mobile-menu-toggle lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors @if($isHome) hover:bg-white/10 text-white @else hover:bg-gray-100 text-navy @endif" aria-label="Toggle menu">
+                <button class="mobile-menu-toggle lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors hover:bg-white/10 text-white" aria-label="Toggle menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
             </div>

@@ -327,7 +327,7 @@
 }
 
 .navbar-solid {
-    background: rgba(251, 249, 246, 0.95) !important;
+    background: var(--color-primary) !important;
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
 }
