@@ -468,14 +468,22 @@
         },
         two_column: {
             label: 'Two Columns',
-            defaultData: { left_heading: 'Left Column', left_content: 'Left column content here.', right_heading: 'Right Column', right_content: 'Right column content here.' },
+            defaultData: { left_heading: 'Left Column', left_content: 'Left column content here.', left_image: '', right_heading: 'Right Column', right_content: 'Right column content here.', right_image: '' },
             render: (d) => `<div class="grid md:grid-cols-2 gap-6 bg-white dark:bg-zinc-800 rounded-xl p-6 shadow-sm border border-zinc-200 dark:border-zinc-700">
-                <div><h4 class="font-bold text-zinc-900 dark:text-white mb-2">${esc(d.left_heading)}</h4><p class="text-sm text-zinc-600 dark:text-zinc-400">${esc(d.left_content)}</p></div>
-                <div><h4 class="font-bold text-zinc-900 dark:text-white mb-2">${esc(d.right_heading)}</h4><p class="text-sm text-zinc-600 dark:text-zinc-400">${esc(d.right_content)}</p></div>
+                <div>${d.left_image ? `<img src="${esc(d.left_image)}" class="w-full rounded-lg mb-3 aspect-[4/3] object-cover">` : ''}<h4 class="font-bold text-zinc-900 dark:text-white mb-2">${esc(d.left_heading)}</h4><p class="text-sm text-zinc-600 dark:text-zinc-400">${esc(d.left_content)}</p></div>
+                <div>${d.right_image ? `<img src="${esc(d.right_image)}" class="w-full rounded-lg mb-3 aspect-[4/3] object-cover">` : ''}<h4 class="font-bold text-zinc-900 dark:text-white mb-2">${esc(d.right_heading)}</h4><p class="text-sm text-zinc-600 dark:text-zinc-400">${esc(d.right_content)}</p></div>
             </div>`,
             editor: (d, id) => `<div class="space-y-4">
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Left Image</label>
+                    <div class="flex items-center gap-2"><input type="text" value="${esc(d.left_image || '')}" placeholder="Image URL" onchange="updateSectionData('${id}','left_image',this.value);renderSections();" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">${imgUploadHtml(id, 'left_image')}${d.left_image ? `<button onclick="updateSectionData('${id}','left_image','');renderSections();renderEditor('${id}')" class="p-1.5 rounded hover:bg-primary/10 text-zinc-400 hover:text-primary" title="Remove"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>` : ''}</div>
+                    ${d.left_image ? `<img src="${esc(d.left_image)}" class="h-20 w-full object-cover rounded border border-zinc-200 dark:border-zinc-700 mt-1">` : ''}
+                </div>
                 <div><label class="block text-xs font-medium text-zinc-500 mb-1">Left Heading</label>${headingEditor(id, 'left_heading', d.left_heading)}</div>
                 <div><label class="block text-xs font-medium text-zinc-500 mb-1">Left Content</label><textarea rows="3" onchange="updateSectionData('${id}','left_content',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">${esc(d.left_content)}</textarea></div>
+                <div class="border-t border-zinc-200 dark:border-zinc-700 pt-4"><label class="block text-xs font-medium text-zinc-500 mb-1">Right Image</label>
+                    <div class="flex items-center gap-2"><input type="text" value="${esc(d.right_image || '')}" placeholder="Image URL" onchange="updateSectionData('${id}','right_image',this.value);renderSections();" class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">${imgUploadHtml(id, 'right_image')}${d.right_image ? `<button onclick="updateSectionData('${id}','right_image','');renderSections();renderEditor('${id}')" class="p-1.5 rounded hover:bg-primary/10 text-zinc-400 hover:text-primary" title="Remove"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>` : ''}</div>
+                    ${d.right_image ? `<img src="${esc(d.right_image)}" class="h-20 w-full object-cover rounded border border-zinc-200 dark:border-zinc-700 mt-1">` : ''}
+                </div>
                 <div><label class="block text-xs font-medium text-zinc-500 mb-1">Right Heading</label>${headingEditor(id, 'right_heading', d.right_heading)}</div>
                 <div><label class="block text-xs font-medium text-zinc-500 mb-1">Right Content</label><textarea rows="3" onchange="updateSectionData('${id}','right_content',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">${esc(d.right_content)}</textarea></div>
             </div>`
