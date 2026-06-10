@@ -806,6 +806,21 @@
         });
     }
 
+    // Toast handler
+    document.addEventListener('toast-show', function(e) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-6 right-6 z-50 px-5 py-3 rounded-xl shadow-2xl text-white text-sm font-medium transition-all duration-300 translate-y-2 opacity-0';
+        const bg = e.detail.variant === 'error' ? 'bg-red-600' : 'bg-green-600';
+        toast.className += ' ' + bg;
+        toast.textContent = e.detail.text || '';
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => { toast.classList.remove('translate-y-2', 'opacity-0'); });
+        setTimeout(() => {
+            toast.classList.add('translate-y-2', 'opacity-0');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    });
+
     // Load existing sections or defaults
     document.addEventListener('DOMContentLoaded', function() {
         try {

@@ -172,6 +172,8 @@ class PageContentSeeder extends Seeder
                     'left_heading' => 'From <span class="text-red">Humble Beginnings</span>',
                     'left_content' => "West Nile Christian Community Fellowship (WCCF) Limited is a faith-based, not-for-profit umbrella organization registered and limited by Guarantee. The organization was incorporated by Uganda Registration Services Bureau (URSB) as a Company Limited by guarantee under Registration No. 80020002936115 on the 25th day of February 2021. The Fellowship is legally operating as a faith-based organization in Uganda and is guided by its Constitution promulgated in July 2011 and as amended in 2019.\n\nWCCF transformed from the former Lugbara Christian Community Fellowship (LCCF) founded in 1990 under the background idea that, since the Lugbara Community were now mixed with different tribes and languages, they could be drawn to worshiping other gods of the land, hence deviating from the true God they know back home.",
                     'right_image' => 'https://images.unsplash.com/photo-1438232997411-2f5e1e7d0d3a?w=800&q=80',
+                    'left_button_text' => 'Learn More',
+                    'left_button_url' => '/what-we-do',
                 ],
             ],
             [
@@ -191,6 +193,8 @@ class PageContentSeeder extends Seeder
                     'left_heading' => 'Growth & <span class="text-red">Expansion</span>',
                     'left_content' => "The fellowship started with initially three member churches: St. Francis Chapel Makerere, St. Paul Church Okuvu, and St. John's Church Entebbe. Later, Gabba Church of Uganda joined.\n\nThe core objective of the Fellowship is to unite all the West Nile community in diaspora to fellowship in their own languages, since language barrier was a big challenge to many ethnic West Nile people other than those who can speak English.\n\nThe Fellowship now operates under a constitution written in July 2011 and amended in 2019, bringing together over 70 member churches spread across Buganda, Busoga and Bunyoro regions.",
                     'right_content' => 'A timeline of growth from 3 founding churches to 70+ member churches across 3 regions.',
+                    'right_button_text' => 'See Our Impact',
+                    'right_button_url' => '/what-we-do',
                 ],
             ],
             [
