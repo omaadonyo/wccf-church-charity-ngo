@@ -7,20 +7,38 @@
     <meta name="theme-color" content="#0f1b2d">
     <title>@yield('title', 'WCCF') | West Nile Christian Community Fellowship</title>
 
+    @php
+        $favicon = \App\Models\ThemeSetting::getValue('theme_favicon_url');
+    @endphp
+    @if($favicon)
+        <link rel="icon" href="{{ $favicon }}" sizes="any">
+        <link rel="icon" href="{{ $favicon }}" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="{{ $favicon }}">
+    @else
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    @endif
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased">
     <nav class="navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300 @yield('navbarExtra', 'navbar-solid')" data-transparent="@yield('navbarTransparent', 'false')">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
+                @php $logo = \App\Models\ThemeSetting::getValue('theme_logo_url'); @endphp
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red to-red-light flex items-center justify-center text-white font-heading font-bold text-lg transition-transform duration-300 group-hover:scale-105">
-                        W
-                    </div>
-                    <div class="hidden sm:block">
-                        <span class="font-heading text-xl font-bold @if(Route::currentRouteName() === 'home') text-white @else text-navy @endif">WCCF</span>
-                        <span class="block text-xs @if(Route::currentRouteName() === 'home') text-white/60 @else text-gray-500 @endif -mt-1">West Nile Christian Fellowship</span>
-                    </div>
+                    @if($logo)
+                        <img src="{{ $logo }}" alt="WCCF" class="h-10 w-auto object-contain">
+                    @else
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red to-red-light flex items-center justify-center text-white font-heading font-bold text-lg transition-transform duration-300 group-hover:scale-105">
+                            W
+                        </div>
+                        <div class="hidden sm:block">
+                            <span class="font-heading text-xl font-bold @if(Route::currentRouteName() === 'home') text-white @else text-navy @endif">WCCF</span>
+                            <span class="block text-xs @if(Route::currentRouteName() === 'home') text-white/60 @else text-gray-500 @endif -mt-1">West Nile Christian Fellowship</span>
+                        </div>
+                    @endif
                 </a>
 
                 <div class="hidden lg:flex items-center gap-8">
@@ -88,9 +106,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 <div class="animate-on-scroll fade-in-up">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red to-red-light flex items-center justify-center text-white font-heading font-bold text-lg">
-                            W
-                        </div>
+                        @if($logo)
+                            <img src="{{ $logo }}" alt="WCCF" class="h-10 w-auto object-contain brightness-0 invert">
+                        @else
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red to-red-light flex items-center justify-center text-white font-heading font-bold text-lg">
+                                W
+                            </div>
+                        @endif
                         <div>
                             <span class="font-heading text-xl font-bold text-white">WCCF</span>
                             <span class="block text-xs text-gray-400 -mt-1">West Nile Christian Fellowship</span>
