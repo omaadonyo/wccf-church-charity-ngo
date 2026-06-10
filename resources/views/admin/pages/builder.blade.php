@@ -289,6 +289,7 @@
         renderEditor(id);
         updateSaveStatus();
     }
+
     // ────────────────────────────────────────────────────────────────────────
 
     // Section type definitions

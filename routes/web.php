@@ -30,11 +30,6 @@ Route::post('/form/submit', function (Request $request) {
     return back()->with('form_success', 'Thank you for your submission! We will get back to you shortly.');
 })->name('form.submit');
 
-// Theme asset serving
-Route::get('/theme-assets/{slug}/{path}', function (string $slug, string $path) {
-    return app(\App\Services\ThemeService::class)->serveAsset($slug, $path);
-})->where('path', '.*')->name('theme.asset');
-
 Route::get('/news', [BlogController::class, 'index'])->name('news.index');
 Route::get('/news/{slug}', [BlogController::class, 'show'])->name('news.show');
 
