@@ -51,6 +51,7 @@
                             ['type' => 'hero_slider', 'label' => 'Hero Slider', 'icon' => 'M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.41a2.25 2.25 0 013.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z'],
                             ['type' => 'vision_mission', 'label' => 'Vision & Mission', 'icon' => 'M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'],
                             ['type' => 'recent_posts', 'label' => 'Recent Posts', 'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z'],
+                            ['type' => 'team', 'label' => 'Team Members', 'icon' => 'M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z'],
                         ];
                     @endphp
                     @foreach($sectionTypes as $st)
@@ -251,6 +252,37 @@
         const section = sections.find(s => s.id === id);
         if (!section || !section.data.slides || !section.data.slides[index]) return;
         section.data.slides[index][key] = value;
+        dirty = true;
+        renderSections();
+        updateSaveStatus();
+    }
+
+    // Team members helpers
+    function addMember(id) {
+        const section = sections.find(s => s.id === id);
+        if (!section) return;
+        if (!section.data.items) section.data.items = [];
+        section.data.items.push({ name: '', role: '', photo: '', bio: '' });
+        dirty = true;
+        renderSections();
+        renderEditor(id);
+        updateSaveStatus();
+    }
+
+    function removeMember(id, index) {
+        const section = sections.find(s => s.id === id);
+        if (!section || !section.data.items) return;
+        section.data.items.splice(index, 1);
+        dirty = true;
+        renderSections();
+        renderEditor(id);
+        updateSaveStatus();
+    }
+
+    function updateMember(id, index, key, value) {
+        const section = sections.find(s => s.id === id);
+        if (!section || !section.data.items || !section.data.items[index]) return;
+        section.data.items[index][key] = value;
         dirty = true;
         renderSections();
         updateSaveStatus();
@@ -534,6 +566,56 @@
                 <div><label class="block text-xs font-medium text-zinc-500 mb-1">Background</label>
                     <select onchange="updateSectionData('${id}','background',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">
                         <option value="wwhite" ${d.background === 'wwhite' ? 'selected' : ''}>White</option>
+                        <option value="dark" ${d.background === 'dark' ? 'selected' : ''}>Dark (Navy)</option>
+                    </select>
+                </div>
+            </div>`
+        },
+        team: {
+            label: 'Team Members',
+            defaultData: { heading: 'Our <span class="text-primary">Leadership</span>', subtitle: 'MEET THE TEAM', items: [
+                { name: 'Rev. John Doe', role: 'Chairperson', photo: '', bio: 'Brief biography of the team member.' },
+                { name: 'Sr. Jane Smith', role: 'Vice Chairperson', photo: '', bio: 'Brief biography of the team member.' },
+            ]},
+            render: (d) => `<div class="bg-wwhite rounded-xl p-6 shadow-sm border border-zinc-200 dark:border-zinc-700">
+                ${d.heading ? `<h3 class="text-xl font-bold text-zinc-900 dark:text-white text-center mb-1">${d.heading}</h3>` : ''}
+                ${d.subtitle ? `<p class="text-xs text-primary font-semibold text-center tracking-widest uppercase mb-6">${esc(d.subtitle)}</p>` : ''}
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    ${(d.items || []).map(item => `<div class="text-center p-3 rounded-lg border border-zinc-100 dark:border-zinc-700">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-zinc-200 dark:bg-zinc-700 mb-2 flex items-center justify-center overflow-hidden">${item.photo ? `<img src="${esc(item.photo)}" class="w-full h-full object-cover">` : `<svg class="w-6 h-6 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>`}</div>
+                        <h4 class="font-semibold text-sm text-zinc-900 dark:text-white">${esc(item.name)}</h4>
+                        <p class="text-xs text-primary font-medium">${esc(item.role)}</p>
+                    </div>`).join('')}
+                </div>
+            </div>`,
+            editor: (d, id) => `<div class="space-y-4">
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Heading</label>${headingEditor(id, 'heading', d.heading)}</div>
+                <div><label class="block text-xs font-medium text-zinc-500 mb-1">Subtitle</label><input type="text" value="${esc(d.subtitle || '')}" onchange="updateSectionData('${id}','subtitle',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm"></div>
+                <div class="border-t border-zinc-200 dark:border-zinc-700 pt-4">
+                    <label class="block text-xs font-medium text-zinc-500 mb-2">Team Members</label>
+                    <div id="members-container-${id}">
+                        ${(d.items || []).map((item, i) => `<div class="member-item mb-3 p-3 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-medium text-zinc-500">Member ${i + 1}</span>
+                                <button onclick="removeMember('${id}', ${i})" class="p-1 rounded hover:bg-primary/10 dark:hover:bg-primary/20 text-zinc-400 hover:text-primary">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <input type="text" value="${esc(item.photo || '')}" placeholder="Photo URL" onchange="updateMember('${id}', ${i}, 'photo', this.value)" class="flex-1 px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">
+                                ${imgUploadHtml(id, 'items', i)}
+                            </div>
+                            ${item.photo ? `<img src="${esc(item.photo)}" class="h-12 w-12 rounded-full object-cover mb-2">` : ''}
+                            <input type="text" value="${esc(item.name || '')}" placeholder="Name" onchange="updateMember('${id}', ${i}, 'name', this.value)" class="w-full px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm mb-2">
+                            <input type="text" value="${esc(item.role || '')}" placeholder="Role / Title" onchange="updateMember('${id}', ${i}, 'role', this.value)" class="w-full px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm mb-2">
+                            <textarea rows="2" placeholder="Brief bio" onchange="updateMember('${id}', ${i}, 'bio', this.value)" class="w-full px-3 py-1.5 rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">${esc(item.bio || '')}</textarea>
+                        </div>`).join('')}
+                    </div>
+                    <button onclick="addMember('${id}')" class="w-full mt-2 px-3 py-2 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-600 text-xs text-zinc-500 hover:border-primary hover:text-primary transition-colors">+ Add Member</button>
+                </div>
+                <div class="border-t border-zinc-200 dark:border-zinc-700 pt-4"><label class="block text-xs font-medium text-zinc-500 mb-1">Background</label>
+                    <select onchange="updateSectionData('${id}','background',this.value)" class="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-sm">
+                        <option value="wwhite" ${d.background === 'dark' ? '' : 'selected'}>White</option>
                         <option value="dark" ${d.background === 'dark' ? 'selected' : ''}>Dark (Navy)</option>
                     </select>
                 </div>

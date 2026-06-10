@@ -207,6 +207,21 @@ class PageContentSeeder extends Seeder
                 ],
             ],
             [
+                'id' => 'sec_wwa_team',
+                'type' => 'team',
+                'data' => [
+                    'heading' => 'Our <span class="text-primary">Leadership</span>',
+                    'subtitle' => 'MEET THE TEAM',
+                    'items' => [
+                        ['name' => 'Rev. John Doe', 'role' => 'Chairperson', 'photo' => '', 'bio' => 'Dedicated servant leader guiding the fellowship with wisdom and faith.'],
+                        ['name' => 'Sr. Jane Smith', 'role' => 'Vice Chairperson', 'photo' => '', 'bio' => 'Passionate about community development and Christian fellowship.'],
+                        ['name' => 'Bro. James Okello', 'role' => 'General Secretary', 'photo' => '', 'bio' => 'Committed to the administrative and spiritual growth of WCCF.'],
+                        ['name' => 'Sr. Grace Nakato', 'role' => 'Treasurer', 'photo' => '', 'bio' => 'Faithful steward of the fellowship\'s resources and finances.'],
+                    ],
+                    'background' => 'wwhite',
+                ],
+            ],
+            [
                 'id' => 'sec_wwa_cta',
                 'type' => 'cta',
                 'data' => [
