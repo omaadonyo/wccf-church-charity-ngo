@@ -33,6 +33,12 @@
                     <flux:sidebar.item icon="paint-brush" :href="route('admin.theme.index')" :current="request()->routeIs('admin.theme.*')" wire:navigate>
                         {{ __('Theme') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="window" :href="route('admin.footer.index')" :current="request()->routeIs('admin.footer.*')" wire:navigate>
+                        {{ __('Footer') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="archive-box" :href="route('admin.backup.index')" :current="request()->routeIs('admin.backup.*')" wire:navigate>
+                        {{ __('Backup') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
             @endif

@@ -129,8 +129,20 @@
                             <span class="block text-xs text-gray-400 -mt-1">West Nile Christian Fellowship</span>
                         </div>
                     </div>
+                    @php
+                        $footerDesc = \App\Models\ThemeSetting::getValue('footer_description', 'A Christian Community Promoting Renewed, Healed and Prayerful Christians.');
+                        $footerAddress = \App\Models\ThemeSetting::getValue('footer_address', 'Kampala, Uganda');
+                        $footerEmail = \App\Models\ThemeSetting::getValue('footer_email', 'info@wccfuganda.org');
+                        $footerPhone = \App\Models\ThemeSetting::getValue('footer_phone', '+256 (0) 700 000 000');
+                        $footerFacebook = \App\Models\ThemeSetting::getValue('footer_facebook_url', '#');
+                        $footerTwitter = \App\Models\ThemeSetting::getValue('footer_twitter_url', '#');
+                        $footerInstagram = \App\Models\ThemeSetting::getValue('footer_instagram_url', '#');
+                        $footerYoutube = \App\Models\ThemeSetting::getValue('footer_youtube_url', '#');
+                        $footerCopyright = \App\Models\ThemeSetting::getValue('footer_copyright_text', 'West Nile Christian Community Fellowship Ltd. All rights reserved.');
+                        $footerRegistration = \App\Models\ThemeSetting::getValue('footer_registration_text', 'Registered with Uganda Registration Services Bureau (URSB) No. 80020002936115');
+                    @endphp
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        A Christian Community Promoting Renewed, Healed and Prayerful Christians.
+                        {{ $footerDesc }}
                     </p>
                 </div>
 
@@ -152,15 +164,15 @@
                     <ul class="space-y-3 text-gray-400 text-sm">
                         <li class="flex items-start gap-2">
                             <svg class="w-4 h-4 mt-0.5 text-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            <span>Kampala, Uganda</span>
+                            <span>{{ $footerAddress }}</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-4 h-4 mt-0.5 text-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            <span>info@wccfuganda.org</span>
+                            <span>{{ $footerEmail }}</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-4 h-4 mt-0.5 text-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                            <span>+256 (0) 700 000 000</span>
+                            <span>{{ $footerPhone }}</span>
                         </li>
                     </ul>
                 </div>
@@ -168,16 +180,16 @@
                 <div class="animate-on-scroll fade-in-up">
                     <h3 class="font-heading text-lg font-semibold text-red mb-4">Follow Us</h3>
                     <div class="flex gap-3">
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Facebook">
+                        <a href="{{ $footerFacebook }}" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Facebook" target="_blank" rel="noopener">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Twitter">
+                        <a href="{{ $footerTwitter }}" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Twitter" target="_blank" rel="noopener">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Instagram">
+                        <a href="{{ $footerInstagram }}" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="Instagram" target="_blank" rel="noopener">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.5 3H7.5A4.5 4.5 0 003 7.5v9A4.5 4.5 0 007.5 21h9a4.5 4.5 0 004.5-4.5v-9A4.5 4.5 0 0016.5 3z"/><circle cx="12" cy="12" r="3"/><path d="M17.5 6.5h.01"/></svg>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="YouTube">
+                        <a href="{{ $footerYoutube }}" class="w-10 h-10 rounded-full bg-white/10 hover:bg-red hover:text-white flex items-center justify-center transition-all duration-300" aria-label="YouTube" target="_blank" rel="noopener">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                         </a>
                     </div>
@@ -186,10 +198,10 @@
 
             <div class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p class="text-gray-500 text-xs">
-                    &copy; {{ date('Y') }} West Nile Christian Community Fellowship Ltd. All rights reserved.
+                    &copy; {{ date('Y') }} {{ $footerCopyright }}
                 </p>
                 <p class="text-gray-500 text-xs">
-                    Registered with Uganda Registration Services Bureau (URSB) No. 80020002936115
+                    {{ $footerRegistration }}
                 </p>
             </div>
         </div>

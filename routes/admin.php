@@ -144,6 +144,23 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
         return redirect()->route('admin.blog.index')->with('success', 'Post deleted.');
     })->name('blog.destroy');
 
+    // Footer
+    Route::get('/footer', fn () => view('admin.footer.index', ['settings' => ThemeSetting::all()->keyBy('key')]))->name('footer.index');
+    Route::post('/footer', function (Request $request) {
+        foreach ($request->except('_token') as $key => $value) {
+            if (str_starts_with($key, 'footer_')) {
+                ThemeSetting::setValue($key, $value);
+            }
+        }
+        ActivityLogger::log('footer_updated', 'Footer settings saved');
+        return back()->with('success', 'Footer settings saved.');
+    })->name('footer.update');
+
+    // Backup
+    Route::get('/backup', [\App\Http\Controllers\Admin\BackupController::class, 'index'])->name('backup.index');
+    Route::get('/backup/export', [\App\Http\Controllers\Admin\BackupController::class, 'export'])->name('backup.export');
+    Route::post('/backup/import', [\App\Http\Controllers\Admin\BackupController::class, 'import'])->name('backup.import');
+
     // Blog categories
     Route::get('/blog/categories', fn () => view('admin.blog.categories', ['categories' => BlogCategory::withCount('posts')->latest()->get()]))->name('blog.categories');
     Route::post('/blog/categories', function (Request $request) {
